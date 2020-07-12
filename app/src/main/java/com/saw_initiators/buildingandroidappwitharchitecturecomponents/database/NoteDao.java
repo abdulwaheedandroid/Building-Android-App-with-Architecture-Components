@@ -1,6 +1,7 @@
 package com.saw_initiators.buildingandroidappwitharchitecturecomponents.database;
 
 import androidx.lifecycle.LiveData;
+import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
@@ -8,10 +9,11 @@ import androidx.room.Query;
 
 import java.util.List;
 
+@Dao
 public interface NoteDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertNote();
+    void insertNote(NoteEntity noteEntity);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertNoteAll(List<NoteEntity> notes);

@@ -2,6 +2,7 @@ package com.saw_initiators.buildingandroidappwitharchitecturecomponents;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,6 +13,7 @@ import android.os.Bundle;
 import com.saw_initiators.buildingandroidappwitharchitecturecomponents.adapter.NotesAdapter;
 import com.saw_initiators.buildingandroidappwitharchitecturecomponents.database.NoteEntity;
 import com.saw_initiators.buildingandroidappwitharchitecturecomponents.utilities.SampleData;
+import com.saw_initiators.buildingandroidappwitharchitecturecomponents.viewmodel.MainViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
     private List<NoteEntity> notesData = new ArrayList<>();
     private NotesAdapter mAdapter;
 
+    private MainViewModel mainViewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,9 +47,14 @@ public class MainActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
         initRecyclerView();
+        initViewModel();
 
-        notesData.addAll(SampleData.getNotes());
+        notesData.addAll(mainViewModel.getNotes);
 
+    }
+
+    private void initViewModel() {
+        mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
     }
 
     private void initRecyclerView() {

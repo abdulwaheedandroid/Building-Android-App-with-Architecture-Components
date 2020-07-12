@@ -1,20 +1,20 @@
 package com.saw_initiators.buildingandroidappwitharchitecturecomponents;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.saw_initiators.buildingandroidappwitharchitecturecomponents.adapter.NotesAdapter;
 import com.saw_initiators.buildingandroidappwitharchitecturecomponents.database.NoteEntity;
-import com.saw_initiators.buildingandroidappwitharchitecturecomponents.utilities.SampleData;
 import com.saw_initiators.buildingandroidappwitharchitecturecomponents.viewmodel.MainViewModel;
 
 import java.util.ArrayList;
@@ -51,21 +51,33 @@ public class MainActivity extends AppCompatActivity {
         initRecyclerView();
         initViewModel();
 
-        notesData.addAll(mainViewModel.getNotes);
-
     }
 
     private void initViewModel() {
+        Observer<List<NoteEntity>> notesObserver = new Observer<List<NoteEntity>>() {
+            @Override
+            public void onChanged(List<NoteEntity> noteEntities) {
+                notesData.clear();
+                notesData.addAll(noteEntities);
+
+                if (mAdapter == null) {
+                    mAdapter = new NotesAdapter(notesData, MainActivity.this);
+                    mRecyclerView.setAdapter(mAdapter);
+                } else {
+                    mAdapter.notifyDataSetChanged();
+                }
+            }
+        };
+
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
+
+        mainViewModel.mNotes.observe(this, notesObserver);
     }
 
     private void initRecyclerView() {
         mRecyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(layoutManager);
-
-        mAdapter = new NotesAdapter(notesData, this);
-        mRecyclerView.setAdapter(mAdapter);
 
         DividerItemDecoration divider = new DividerItemDecoration(
                 mRecyclerView.getContext(), layoutManager.getOrientation());
@@ -100,10 +112,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void deleteAllNotes() {
-       // mainViewModel.dele();
+        // mainViewModel.dele();
     }
 
     private void addSampleData() {
-       mainViewModel.addSampleData();
+        mainViewModel.addSampleData();
     }
 }

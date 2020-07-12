@@ -1,6 +1,6 @@
 package com.saw_initiators.buildingandroidappwitharchitecturecomponents.utilities;
 
-import com.saw_initiators.buildingandroidappwitharchitecturecomponents.model.NoteEntity;
+import com.saw_initiators.buildingandroidappwitharchitecturecomponents.database.NoteEntity;
 
 import java.util.ArrayList;
 import java.util.Calendar;

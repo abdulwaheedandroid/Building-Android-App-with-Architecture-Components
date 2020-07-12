@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.saw_initiators.buildingandroidappwitharchitecturecomponents.EditorActivity;
 import com.saw_initiators.buildingandroidappwitharchitecturecomponents.R;
-import com.saw_initiators.buildingandroidappwitharchitecturecomponents.model.NoteEntity;
+import com.saw_initiators.buildingandroidappwitharchitecturecomponents.database.NoteEntity;
 import com.saw_initiators.buildingandroidappwitharchitecturecomponents.utilities.Constant;
 
 import java.util.List;

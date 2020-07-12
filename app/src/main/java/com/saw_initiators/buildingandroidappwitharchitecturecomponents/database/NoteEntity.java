@@ -1,4 +1,4 @@
-package com.saw_initiators.buildingandroidappwitharchitecturecomponents.model;
+package com.saw_initiators.buildingandroidappwitharchitecturecomponents.database;
 
 import androidx.room.Entity;
 import androidx.room.Ignore;

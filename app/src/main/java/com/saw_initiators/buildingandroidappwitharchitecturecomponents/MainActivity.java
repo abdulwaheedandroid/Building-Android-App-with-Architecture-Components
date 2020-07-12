@@ -10,7 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.saw_initiators.buildingandroidappwitharchitecturecomponents.adapter.NotesAdapter;
-import com.saw_initiators.buildingandroidappwitharchitecturecomponents.model.NoteEntity;
+import com.saw_initiators.buildingandroidappwitharchitecturecomponents.database.NoteEntity;
 import com.saw_initiators.buildingandroidappwitharchitecturecomponents.utilities.SampleData;
 
 import java.util.ArrayList;

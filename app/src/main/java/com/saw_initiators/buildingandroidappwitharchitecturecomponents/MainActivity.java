@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void deleteAllNotes() {
-        // mainViewModel.dele();
+        mainViewModel.deleteAllNotes();
     }
 
     private void addSampleData() {

@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.saw_initiators.buildingandroidappwitharchitecturecomponents.EditorActivity;
 import com.saw_initiators.buildingandroidappwitharchitecturecomponents.R;
 import com.saw_initiators.buildingandroidappwitharchitecturecomponents.model.NoteEntity;
 import com.saw_initiators.buildingandroidappwitharchitecturecomponents.utilities.Constant;
@@ -46,9 +47,9 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder> 
         holder.mFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              /*  Intent intent = new Intent(mContext, EditorActivity.class);
+                Intent intent = new Intent(mContext, EditorActivity.class);
                 intent.putExtra(Constant.NOTE_ID_KEY, note.getId());
-                mContext.startActivity(intent);*/
+                mContext.startActivity(intent);
             }
         });
     }

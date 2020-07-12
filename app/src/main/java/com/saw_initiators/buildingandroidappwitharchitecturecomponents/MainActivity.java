@@ -25,11 +25,11 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
 
-  /*  @OnClick(R.id.fab)
+    @OnClick(R.id.fab)
     void fabClickHandler() {
         Intent intent = new Intent(this, EditorActivity.class);
         startActivity(intent);
-    }*/
+    }
 
     private List<NoteEntity> notesData = new ArrayList<>();
     private NotesAdapter mAdapter;

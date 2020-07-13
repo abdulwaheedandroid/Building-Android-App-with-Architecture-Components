@@ -2,24 +2,33 @@ package com.saw_initiators.buildingandroidappwitharchitecturecomponents;
 
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+
+import com.saw_initiators.buildingandroidappwitharchitecturecomponents.database.NoteEntity;
+import com.saw_initiators.buildingandroidappwitharchitecturecomponents.viewmodel.EditorViewModel;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.saw_initiators.buildingandroidappwitharchitecturecomponents.utilities.Constant.EDITING_KEY;
+import static com.saw_initiators.buildingandroidappwitharchitecturecomponents.utilities.Constant.NOTE_ID_KEY;
 
 public class EditorActivity extends AppCompatActivity {
 
     @BindView(R.id.note_text)
     TextView mTextView;
 
-    //private EditorViewModel mViewModel;
     private boolean mNewNote, mEditing;
+
+    private EditorViewModel mViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +45,12 @@ public class EditorActivity extends AppCompatActivity {
             mEditing = savedInstanceState.getBoolean(EDITING_KEY);
         }
 
+
         initViewModel();
     }
 
     private void initViewModel() {
-     /*   mViewModel = ViewModelProviders.of(this)
+        mViewModel = ViewModelProviders.of(this)
                 .get(EditorViewModel.class);
 
         mViewModel.mLiveNote.observe(this, new Observer<NoteEntity>() {
@@ -50,9 +60,9 @@ public class EditorActivity extends AppCompatActivity {
                     mTextView.setText(noteEntity.getText());
                 }
             }
-        });*/
+        });
 
-        /*Bundle extras = getIntent().getExtras();
+        Bundle extras = getIntent().getExtras();
         if (extras == null) {
             setTitle(getString(R.string.new_note));
             mNewNote = true;
@@ -60,27 +70,27 @@ public class EditorActivity extends AppCompatActivity {
             setTitle(getString(R.string.edit_note));
             int noteId = extras.getInt(NOTE_ID_KEY);
             mViewModel.loadData(noteId);
-        }*/
+        }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-       /* if (!mNewNote) {
+        if (!mNewNote) {
             MenuInflater inflater = getMenuInflater();
             inflater.inflate(R.menu.menu_editor, menu);
-        }*/
+        }
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-      /*  if (item.getItemId() == android.R.id.home) {
+        if (item.getItemId() == android.R.id.home) {
             saveAndReturn();
             return true;
         } else if (item.getItemId() == R.id.action_delete) {
-           // mViewModel.deleteNote();
+            mViewModel.deleteNote();
             finish();
-        }*/
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -90,7 +100,7 @@ public class EditorActivity extends AppCompatActivity {
     }
 
     private void saveAndReturn() {
-        //mViewModel.saveNote(mTextView.getText().toString());
+        mViewModel.saveNote(mTextView.getText().toString());
         finish();
     }
 
